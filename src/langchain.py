@@ -1,5 +1,5 @@
-from langchain.chains.question_answering import load_qa_chain
 from langchain_core.output_parsers import StrOutputParser
+from langchain.chains.question_answering import load_qa_chain
 from langchain_core.prompts.chat import ChatPromptTemplate
 
 from llm import llm
@@ -25,3 +25,5 @@ def resposta_duvida(pergunta):
       {"input_documents": docs, "query": query}
   )
   return resposnse['output_text']
+
+resposta_duvida("tempo de duração do curso")
