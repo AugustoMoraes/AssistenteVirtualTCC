@@ -3,9 +3,10 @@ from langchain_community.document_loaders import PyPDFLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.retrievers import BM25Retriever
 
+
 def retriever():
 
-    pdf_folder_path = 'files/'
+    pdf_folder_path = '/home/augustinho/PycharmProjects/AssistenteVirtual/files'
     documents = []
     for file in os.listdir(pdf_folder_path):
         if file.endswith('.pdf'):
@@ -22,4 +23,5 @@ def retriever():
     texts = text_splitter.split_documents(documents)
 
     retriever = BM25Retriever.from_documents(texts)
+
     return retriever
