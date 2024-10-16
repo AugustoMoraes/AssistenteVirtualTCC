@@ -6,9 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="e8bfd11b-c4c9-46fc-979c-acbd1d0859f0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/langchain.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/langchain.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/llm.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/llm.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rag.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/rag.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,11 +38,12 @@
   &quot;keyToString&quot;: {
     &quot;Python.langchain.executor&quot;: &quot;Run&quot;,
     &quot;Python.llm.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;
+    &quot;git-widget-placeholder&quot;: &quot;modificando__codigo&quot;
   }
 }</component>
-  <component name="RunManager" selected="Python.langchain">
+  <component name="RunManager" selected="Python.main">
     <configuration name="langchain" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="AssistenteVirtual" />
       <option name="ENV_FILES" value="" />
@@ -135,16 +134,5 @@
       <updated>1728066795355</updated>
     </task>
     <servers />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/main.py</url>
-          <line>8</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

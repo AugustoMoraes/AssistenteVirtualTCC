@@ -1,16 +1,70 @@
-# This is a sample Python script.
+import os
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+from dotenv import load_dotenv
+from langchain_community.chat_models import ChatMaritalk
+from langchain_community.document_loaders import PyPDFLoader
+from langchain.chains.question_answering import load_qa_chain
+from langchain_text_splitters import RecursiveCharacterTextSplitter
+from langchain_community.retrievers import BM25Retriever
+from langchain_core.prompts.chat import ChatPromptTemplate
+#from langchain_core.output_parsers import StrOutputParser
+
+load_dotenv()
+
+def resposta(pergunta):
+    llm = ChatMaritalk(
+            model="sabia-3",
+            api_key= os.getenv("CHAVE_API"),
+            temperature=0.7,
+            max_tokens=100
+        )
+
+    pdf_folder_path = '/home/augustinho/PycharmProjects/AssistenteVirtual/files'
+    documents = []
+    for file in os.listdir(pdf_folder_path):
+        if file.endswith('.pdf'):
+            #print(f'Arquivo: {file}')
+            pdf_path = os.path.join(pdf_folder_path, file)
+            loader = PyPDFLoader(pdf_path)
+            #print(f'INÍCIO: {loader}')
+            #loader_insert = loader.load()
+            documents.extend(loader.load())
+            #documents.extend(loader_insert)
+            #print(f'\n{documents} \n\nFIM\n\n')
+    #print(f'Documentos: {documents}')
+    text_splitter = RecursiveCharacterTextSplitter(
+            chunk_size=500, chunk_overlap=100, separators=["\n", " ", ""]
+    )
+    texts = text_splitter.split_documents(documents)
+
+    retriever = BM25Retriever.from_documents(texts)
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+    prompt = """Utilze apenas os documentos para responder as perguntas, caso contrário, retorne a seguinte resposta: "Não conseguimos responder sua pergunta, por favor, entre em contato com a secretaria.".
+        Contexto: {context}
+
+        Pergunta: {query}
+    """
+
+    qa_prompt = ChatPromptTemplate.from_messages([("human", prompt)])
+
+    #output_parser = StrOutputParser()
 
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+    query = pergunta
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+      #retriver = texts()
+    docs = retriever.invoke(query)
+
+    #chain = qa_prompt | llm | output_parser
+    chain = load_qa_chain(llm, chain_type="stuff", verbose=True, prompt=qa_prompt)
+
+    resposnse = chain.invoke(
+          {"input_documents": docs, "query": query}
+    )
+
+    return resposnse['output_text']
+
+#print(resposta('qual o tempo de duração do curso de sistemas de informação?'))
+
+print(resposta('qual o tempo de duração do estágio?'))
