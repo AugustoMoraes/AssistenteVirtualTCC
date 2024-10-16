@@ -34,7 +34,7 @@ def resposta(pergunta):
 
     retriever = BM25Retriever.from_documents(texts)
 
-    prompt = """Utilze apenas os documentos para responder as perguntas, caso contrário, retorne a seguinte resposta: "Não conseguimos responder sua pergunta, por favor, entre em contato com a secretaria.".
+    prompt = """Utilze apenas os documentos para responder as perguntas, caso contrário, retorne a seguinte resposta: "Não conseguimos responder sua pergunta ou ela não está relacionada à secretaria da faculdade de sistemas. Por favor, entre em contato com a secretaria.".
         Contexto: {context}
 
         Pergunta: {query}
@@ -56,4 +56,4 @@ def resposta(pergunta):
 
 #print(resposta('qual o tempo de duração do curso de sistemas de informação?'))
 
-print(resposta('qual o tempo de duração do estágio?'))
+#print(resposta('qual o tempo de duração do estágio?'))
