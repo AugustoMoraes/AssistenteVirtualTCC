@@ -40,32 +40,28 @@ def resposta(pergunta):
 
     retriever = BM25Retriever.from_documents(texts)
 
-    prompt = """Utilze o array de documentos para responder as perguntas, caso contrário, retorne a seguinte resposta: "Não conseguimos responder sua pergunta ou ela não está relacionada à secretaria da faculdade de sistemas. Por favor, entre em contato com a secretaria.".
+    prompt = """
+        Utilze o array de documentos para responder as perguntas, caso contrário, retorne a seguinte resposta: "Não conseguimos responder sua pergunta ou ela não está relacionada à secretaria da faculdade de sistemas. Por favor, entre em contato com a secretaria.".
         {context}
 
-        {input}
+        Pergunta: {query}
     """
 
-    prompt_template = ChatPromptTemplate.from_messages([
-        ("system", prompt),
-        ("human", "{input}")
-    ])
+    prompt_template = ChatPromptTemplate.from_messages([("human", prompt)])
+    chain = load_qa_chain(llm, chain_type="stuff", verbose=True, prompt=prompt_template)
 
     query = pergunta
 
-    question_answerer_chain = create_stuff_documents_chain(llm,prompt_template)
-    rag_chain =create_retrieval_chain(retriever, question_answerer_chain)
-    response = rag_chain.invoke({"input": query})
-    # docs = retriever.invoke(query)
-    #
-    # chain = load_qa_chain(llm, chain_type="stuff", verbose=True, prompt=prompt_template)
-    #
-    # resposnse = chain.invoke(
-    #     {"input_documents": docs, "query": query}
-    # )
+    docs = retriever.invoke(query)
 
-    return response['answer']
+    response = chain.invoke(
+        {"input_documents": docs, "query": query}
+    )
+
+
+    return response['output_text']
 
 #print(resposta('qual o tempo de duração do curso de sistemas de informação?'))
 
-print(resposta('o que é o Trabalho de Conclusão de Curso?'))
+#print(resposta('o que é o Trabalho de Conclusão de Curso?'))
+print(resposta('Disciplinas do primeiro semestre'))
