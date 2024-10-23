@@ -25,7 +25,10 @@ def resposta(pergunta):
         if file.endswith('.pdf'):
             pdf_path = os.path.join(pdf_folder_path, file)
             loader = PyPDFLoader(pdf_path)
+            #print(f'Arquivo: {loader}')
             documents.extend(loader.load())
+
+    #print(f'\n\nDocumento: {documents}')
 
     text_splitter = RecursiveCharacterTextSplitter(
         chunk_size=500, chunk_overlap=100, separators=["\n", " ", ""]
@@ -34,7 +37,7 @@ def resposta(pergunta):
 
     retriever = BM25Retriever.from_documents(texts)
 
-    prompt = """Utilze apenas os documentos para responder as perguntas, caso contrário, retorne a seguinte resposta: "Não conseguimos responder sua pergunta ou ela não está relacionada à secretaria da faculdade de sistemas. Por favor, entre em contato com a secretaria.".
+    prompt = """Utilze o array de documentos para responder as perguntas, caso contrário, retorne a seguinte resposta: "Não conseguimos responder sua pergunta ou ela não está relacionada à secretaria da faculdade de sistemas. Por favor, entre em contato com a secretaria.".
         Contexto: {context}
 
         Pergunta: {query}
@@ -56,4 +59,4 @@ def resposta(pergunta):
 
 #print(resposta('qual o tempo de duração do curso de sistemas de informação?'))
 
-#print(resposta('qual o tempo de duração do estágio?'))
+print(resposta('\n\nQual o objetivo do curso?'))

@@ -6,7 +6,7 @@ from resposta_langchain_rag import resposta
 
 st.set_page_config(page_title="Lendo Arquivos da UFPA", page_icon=":robot:")
 
-st.header("Diretor Virtuaç ap ines de Assistente")
+st.header("Diretor Virtual ap Ines de Assistente")
 
 input = st.text_input('Faça sua pergunta!')
 submit = st.button("Generate")
