@@ -6,6 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="e8bfd11b-c4c9-46fc-979c-acbd1d0859f0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/Cartilha_de_Estágio.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/Diretrizes-TCC-FASI-2024.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/Disciplinas.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/PPC-SI-Cametá.pdf" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/resposta_langchain_rag.py" beforeDir="false" afterPath="$PROJECT_DIR$/resposta_langchain_rag.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -34,16 +38,16 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python.langchain.executor&quot;: &quot;Run&quot;,
-    &quot;Python.llm.executor&quot;: &quot;Run&quot;,
-    &quot;Python.main.executor&quot;: &quot;Run&quot;,
-    &quot;Python.resposta_langchain_rag.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.langchain.executor": "Run",
+    "Python.llm.executor": "Run",
+    "Python.main.executor": "Run",
+    "Python.resposta_langchain_rag.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "dois-pdf"
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="Python.resposta_langchain_rag">
     <configuration name="langchain" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="AssistenteVirtual" />

@@ -7,9 +7,6 @@ from langchain.chains.question_answering import load_qa_chain
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.retrievers import BM25Retriever
 from langchain_core.prompts.chat import ChatPromptTemplate
-from langchain.chains import create_retrieval_chain
-from langchain.chains.combine_documents import create_stuff_documents_chain
-#from langchain_core.output_parsers import StrOutputParser
 
 load_dotenv()
 
@@ -18,19 +15,20 @@ def resposta(pergunta):
         model="sabia-3",
         api_key= os.getenv("CHAVE_API"),
         temperature=0.7,
-        max_tokens=100
+        #max_tokens=150
     )
 
-    # pdf_folder_path = '/home/augustinho/PycharmProjects/AssistenteVirtual/files'
-    # documents = []
-    # for file in os.listdir(pdf_folder_path):
-    #     if file.endswith('.pdf'):
-    #         pdf_path = os.path.join(pdf_folder_path, file)
-    #         loader = PyPDFLoader(pdf_path)
-    #         #print(f'Arquivo: {loader}')
-    #         documents.extend(loader.load())
-    loader = PyPDFLoader('/home/augustinho/PycharmProjects/AssistenteVirtual/files/documentos.pdf')
-    documents = loader.load()
+    pdf_folder_path = '/home/augustinho/PycharmProjects/AssistenteVirtual/files'
+    documents = []
+    for file in os.listdir(pdf_folder_path):
+        if file.endswith('.pdf'):
+            pdf_path = os.path.join(pdf_folder_path, file)
+            loader = PyPDFLoader(pdf_path)
+            #print(f'Arquivo: {loader}')
+            documents.extend(loader.load())
+
+    # loader = PyPDFLoader('/home/augustinho/PycharmProjects/AssistenteVirtual/files/Disciplinas.pdf')
+    # documents = loader.load()
     #print(f'\n\nDocumento: {documents}')
 
     text_splitter = RecursiveCharacterTextSplitter(
@@ -41,7 +39,7 @@ def resposta(pergunta):
     retriever = BM25Retriever.from_documents(texts)
 
     prompt = """
-        Utilze o array de documentos para responder as perguntas, caso contrário, retorne a seguinte resposta: "Não conseguimos responder sua pergunta ou ela não está relacionada à secretaria da faculdade de sistemas. Por favor, entre em contato com a secretaria.".
+        Faça uma busca nos documentos e responda a pergunta, caso não consiga retorne a seguinte msg: 'Desculpe não conseguimos responder sua dúvida, tente um outro momento!'
         {context}
 
         Pergunta: {query}
@@ -64,4 +62,4 @@ def resposta(pergunta):
 #print(resposta('qual o tempo de duração do curso de sistemas de informação?'))
 
 #print(resposta('o que é o Trabalho de Conclusão de Curso?'))
-print(resposta('Disciplinas do primeiro semestre'))
+print(resposta('Qual a carga horária de disciplinas obrigatórias?'))
