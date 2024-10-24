@@ -39,7 +39,7 @@ def resposta(pergunta):
     retriever = BM25Retriever.from_documents(texts)
 
     prompt = """
-        Faça uma busca nos documentos e responda a pergunta, caso não consiga retorne a seguinte msg: 'Desculpe não conseguimos responder sua dúvida, tente um outro momento!'
+        Utilze apenas os documentos para responder as perguntas, caso contrário, retorne a seguinte resposta: "Não conseguimos responder sua pergunta, por favor, entre em contato com a secretaria.".
         {context}
 
         Pergunta: {query}
@@ -61,5 +61,7 @@ def resposta(pergunta):
 
 #print(resposta('qual o tempo de duração do curso de sistemas de informação?'))
 
-#print(resposta('o que é o Trabalho de Conclusão de Curso?'))
-print(resposta('Qual a carga horária de disciplinas obrigatórias?'))
+# print(resposta('o que é o Trabalho de Conclusão de Curso?'))
+# print(resposta('Qual a carga horária de disciplinas obrigatórias?'))
+# print(resposta('Qual o total de cargahorŕia do curso de Sistemas de Informação?'))
+#print(resposta('Qual as disciplinas do primeiro semestre ou período do curso?'))
